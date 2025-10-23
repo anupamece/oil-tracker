@@ -1,0 +1,666 @@
+/* Registration Form Page */
+.registration-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(1000px 500px at 10% 10%, rgba(16,185,129,0.06), transparent), var(--bg);
+  color: #F5F1DC;
+  padding: 1rem;
+  /* Animation handled by Framer Motion */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.registration-container {
+  width: 100%;
+  max-width: 600px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  overflow: hidden;
+}
+
+.registration-header {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  padding-top: 1.75rem; /* Extra space for the back button */
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  position: relative;
+  overflow: visible;
+}
+
+.logo-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  margin-top: 0.25rem;
+  position: relative;
+  overflow: visible;
+  height: 50px; /* Fixed height to prevent layout shifts */
+}
+
+.form-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  position: relative;
+  z-index: 5; /* Ensure logo stays above other elements */
+}
+
+.form-logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.form-logo {
+  height: 30px;
+  width: auto;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+.registration-header h2 {
+  margin: 0.25rem auto 0.5rem;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Step indicator styles */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.75rem 0;
+}
+
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.step-dot.active {
+  background-color: var(--accent);
+}
+
+.step-line {
+  height: 2px;
+  width: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.step-line.active {
+  background-color: var(--accent);
+}
+
+.back-button {
+  color: #e6eef6;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  border: none;
+  transition: transform 0.2s;
+  margin-right: 0.5rem;
+}
+
+.back-button:hover {
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+.registration-form {
+  padding: 1.5rem;
+}
+
+.form-label {
+  color: #e6eef6;
+  font-weight: 500;
+}
+
+.form-text {
+  color: var(--muted);
+}
+
+.form-control, .form-select {
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #e6eef6;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgba(16,185,129,0.25);
+  color: #fff;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e6eef6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select option {
+  background-color: var(--card);
+  color: #e6eef6;
+}
+
+.form-control::placeholder {
+  color: rgba(230, 238, 246, 0.4);
+}
+
+.form-check-label {
+  color: #e6eef6;
+}
+
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.submit-button {
+  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+}
+
+/* Multi-step form animation container */
+.registration-form > div {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Skip and explore link */
+.btn-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.btn-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Oil usage stepper styles */
+.oil-usage-stepper {
+  margin: 1.5rem 0;
+}
+
+.stepper-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+  position: relative;
+  width: 22%;
+}
+
+.stepper-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.stepper-option.active .stepper-indicator {
+  background-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.stepper-option:not(.active):hover .stepper-indicator {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.stepper-icon {
+  font-size: 1.5rem;
+}
+
+.stepper-label {
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+
+.stepper-option.active .stepper-label {
+  color: white;
+}
+
+/* Emoji scale for eating out frequency */
+.emoji-scale {
+  margin: 1.5rem 0;
+}
+
+.emoji-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.emoji {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.emoji-option.active .emoji {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.emoji-option:hover .emoji {
+  opacity: 0.8;
+}
+
+.emoji-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+
+.emoji-option.active .emoji-label {
+  color: white;
+}
+
+/* Notification card styles */
+.notification-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.notification-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.25rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.notification-card.active {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--accent);
+}
+
+.notification-card:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.notification-icon {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+
+.notification-card.active .notification-icon {
+  color: var(--accent);
+}
+
+.notification-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.card-check {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.notification-card.active .card-check {
+  opacity: 1;
+}
+
+/* Form element animations */
+.form-control, .form-select, .form-check-input {
+  transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 520px) {
+  .registration-page {
+    padding: 0;
+  }
+  
+  .registration-container {
+    border-radius: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent any overflow issues */
+  }
+  
+  /* Adjust step indicator for mobile */
+  .step-indicator {
+    margin: 0.5rem 0;
+  }
+  
+  .step-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .step-line {
+    width: 20px;
+  }
+  
+  .registration-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--card);
+    padding: 0.75rem 1rem;
+  }
+  
+  .registration-header h2 {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  
+  .logo-centered {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    height: 45px; /* Slightly smaller fixed height for mobile */
+  }
+  
+  .form-logo-container {
+    margin: 0;
+  }
+  
+  .form-logo-circle {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .form-logo {
+    height: 26px;
+  }
+  
+  .registration-form {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  /* Fix dropdown text overflow issues */
+  .form-select {
+    text-overflow: ellipsis;
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word;
+    min-height: 38px; /* Ensure minimum height for touch targets */
+  }
+  
+  /* Fix dropdown positioning on mobile devices */
+  select.form-select {
+    max-width: 100%; /* Ensure dropdown doesn't overflow container */
+    width: 100%;
+  }
+  
+  /* Add spacing between inputs in same row */
+  .row .col-6:first-child {
+    padding-right: 6px;
+  }
+  
+  .row .col-6:last-child {
+    padding-left: 6px;
+  }
+  
+  /* Improve form layout on very small screens */
+  @media (max-width: 380px) {
+    .row .col-6 {
+      width: 100%; /* Stack columns on very small screens */
+      padding: 0;
+    }
+    
+    /* Add spacing between stacked inputs */
+    .row .col-6:first-child {
+      margin-bottom: 0.75rem;
+      padding-right: 0;
+    }
+    
+    .row .col-6:last-child {
+      padding-left: 0;
+    }
+    
+    /* Further adjustments for dropdown on very small screens */
+    .form-select {
+      font-size: 0.9rem;
+      padding-right: 2rem; /* Ensure space for the dropdown arrow */
+      background-position: right 0.5rem center; /* Position dropdown arrow properly */
+    }
+    
+    /* Make sure option text fits properly */
+    .form-select option {
+      white-space: normal;
+      word-wrap: break-word;
+      padding: 5px;
+    }
+    
+    /* Ensure the dropdown options are properly contained */
+    select.form-select option {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    /* Better button spacing on mobile */
+    .d-flex.gap-2 {
+      gap: 0.5rem !important;
+    }
+    
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 0.75rem;
+    }
+    
+    /* Mobile styles for oil usage stepper */
+    .stepper-indicator {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .stepper-icon {
+      font-size: 1.25rem;
+    }
+    
+    .stepper-label {
+      font-size: 0.7rem;
+    }
+    
+    /* Mobile styles for emoji scale */
+    .emoji {
+      font-size: 1.5rem;
+    }
+    
+    .emoji-label {
+      font-size: 0.65rem;
+    }
+    
+    /* Mobile styles for notification cards */
+    .notification-card {
+      padding: 1rem;
+    }
+    
+    .notification-card h4 {
+      font-size: 1rem;
+    }
+    
+    /* Summary page styles */
+    .user-summary .card {
+      padding: 0.75rem !important;
+    }
+  }
+}
+
+/* Summary page styles */
+.user-summary .card {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: #F5F1DC;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-summary .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.user-summary h4 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 0.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.user-summary p {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #F5F1DC;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.user-summary .bmi-circle {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.user-summary .bmi-circle:hover {
+  transform: scale(1.05);
+}
+
+.user-summary .alert {
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #000000;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-check {
+  color: #F5F1DC;
+}
+
+.form-check a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.form-check a:hover {
+  text-decoration: underline;
+}
+
+.text-white-75 {
+  color: #F5F1DC !important;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.text-summary-subtitle {
+  color: #F5F1DC !important;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.summary-label {
+  font-weight: 700;
+  color: var(--primary);
+  margin-right: 5px;
+  display: inline-block;
+  min-width: 140px;
+}
+
+.summary-value {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  display: inline-block;
+}
+
+.bmi-stat {
+  color: #F5F1DC;
+  font-weight: 600;
+}
+
+.bmi-value {
+  color: #F5F1DC;
+}

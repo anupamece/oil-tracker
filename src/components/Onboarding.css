@@ -1,0 +1,440 @@
+/* Onboarding / Hero styles */
+
+/* Dark theme variables */
+:root {
+  --bg: #0b1020;
+  --card: #0f1724;
+  --muted: #9aa6b2;
+  --accent: #10b981;
+  --accent-2: #f97316;
+  --glass: rgba(255,255,255,0.02);
+}
+
+.onboard-hero {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(1000px 500px at 10% 10%, rgba(16,185,129,0.06), transparent), var(--bg);
+  color: #e6eef6;
+  position: relative; /* For pseudo-element positioning */
+  overflow: hidden; /* Keep pseudo-elements contained */
+}
+
+.hero-card {
+  width: 100%; /* full viewport width */
+  min-height: 100vh; /* full height */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 0; /* full-bleed look */
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.hero-inner {
+  max-width: 1180px;
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2rem;
+  align-items: center;
+  position: relative; /* For z-index */
+  z-index: 1; /* Above the pseudo-elements */
+}
+
+.app-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-circle-bg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.app-logo {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.hero-content p.lead {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.lang-select {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oil-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(2,6,23,0.6));
+  border-radius: 12px;
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Desktop view (display normal image) */
+@media (min-width: 521px) {
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  /* Reset the illustration position for desktop layout */
+  .hero-content .illustration {
+    display: none; /* Hide the illustration within hero-content */
+  }
+  
+  .hero-inner > .illustration {
+    display: flex; /* Show the illustration as a direct child of hero-inner */
+  }
+  
+  .hero-content {
+    display: block;
+    min-height: auto;
+  }
+  
+  .app-header {
+    padding: 0;
+  }
+  
+  .description-text {
+    padding: 0;
+  }
+  
+  .illustration {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: unset; /* Reset order for desktop */
+    width: auto;
+  }
+  
+  .oil-image {
+    width: auto;
+    max-height: 340px; /* Larger image for desktop */
+  }
+  
+  .action-buttons {
+    padding: 0;
+    margin-top: 1.5rem;
+  }
+  
+  .btn-lg {
+    display: inline-block;
+    width: auto;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.25rem;
+    text-align: left;
+  }
+  
+  .hero-content p.lead {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  /* Hide pseudo-elements on desktop */
+  .onboard-hero::before,
+  .onboard-hero::after {
+    display: none;
+  }
+}
+
+/* Mobile specific refinements */
+@media (max-width: 520px) {
+  .hero-inner {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+  
+  /* Logo circle background for mobile */
+  .logo-circle-bg {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .app-logo {
+    height: 40px;
+    scale: 2.4;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-content p.lead {
+    font-size: 0.95rem;
+  }
+
+  .lang-select {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .lang-select label {
+    display: none; /* Hide "Language" label on mobile */
+  }
+  
+  .btn-lg {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .btn-outline-secondary.btn-lg {
+    margin-bottom: 0;
+  }
+  
+  /* Font size adjustments for mobile */
+  .app-logo {
+    height: 40px;
+    margin-bottom: 0.25rem;
+  }
+  
+  .hero-content p.lead {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  /* Special mobile layout */
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    padding: 0;
+    z-index: 2; /* Ensure content is above background */
+  }
+  
+  /* App header in top row */
+  .app-header {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    margin: 0;
+    order: 1;
+  }
+  
+  /* Image between header and buttons */
+  .hero-content .illustration {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    order: 3; /* Place after header and description */
+    margin: 0.5rem 0 1rem;
+    padding: 0;
+    z-index: 5; /* Ensure image is above any background elements */
+    position: relative; /* Create stacking context */
+  }
+
+  .hero-content .oil-image {
+    width: 100%;
+    height: auto;
+    max-height: 32vh; /* Adjust to fit in the space */
+    object-fit: contain;
+    border-radius: 16px;
+    display: block; /* Ensure display is block */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Text description below header, before image */
+  .description-text {
+    order: 2;
+    padding: 0.75rem 1.25rem 0.5rem;
+    margin: 0;
+  }
+  
+  /* Push buttons toward bottom but leave space */
+  .action-buttons {
+    order: 4;
+    padding: 0.75rem 1.25rem 1.5rem;
+    margin-top: 0; /* No additional space needed after image */
+    width: 100%;
+  }
+
+  /* Dark background without the image blur */
+  .onboard-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    z-index: -2;
+  }
+
+  /* Add a gradient overlay */
+  .onboard-hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+      rgba(11, 16, 32, 0.95) 0%, 
+      rgba(11, 16, 32, 0.7) 15%, 
+      rgba(11, 16, 32, 0.4) 40%, 
+      rgba(11, 16, 32, 0.4) 60%, 
+      rgba(11, 16, 32, 0.7) 85%, 
+      rgba(11, 16, 32, 0.95) 100%);
+    z-index: 0; /* Ensure this is below content */
+  }
+
+  .hero-content {
+    padding: 0;
+    background: transparent;
+    border: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 3;
+    position: relative;
+  }
+  
+  /* Fix vertical spacing for mobile layout */
+  .hero-content > * {
+    flex-shrink: 0; /* Prevent elements from shrinking */
+  }
+}
+
+/* Registration Form Modal Styles */
+.registration-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.registration-form-container {
+  width: 90%;
+  max-width: 500px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideIn 0.3s ease;
+}
+
+.registration-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.registration-form-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.registration-form {
+  padding: 1.5rem;
+}
+
+.form-label {
+  color: #e6eef6;
+  font-weight: 500;
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e6eef6;
+  padding: 0.75rem;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25);
+  color: #fff;
+}
+
+.form-check-label {
+  color: #e6eef6;
+}
+
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Media query adjustments for the form */
+@media (max-width: 520px) {
+  .registration-form-container {
+    width: 95%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  
+  .registration-form {
+    padding: 1rem;
+  }
+}
