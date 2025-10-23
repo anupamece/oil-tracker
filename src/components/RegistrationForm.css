@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(1000px 500px at 10% 10%, rgba(16,185,129,0.06), transparent), var(--bg);
-  color: #F5F1DC;
+  color: #F3F2EC;
   padding: 1rem;
   /* Animation handled by Framer Motion */
   position: absolute;
@@ -616,7 +616,7 @@
 }
 
 .form-check {
-  color: #F5F1DC;
+  color: #F3F2EC;
 }
 
 .form-check a {
@@ -630,7 +630,7 @@
 }
 
 .text-white-75 {
-  color: #F5F1DC !important;
+  color: #F3F2EC !important;
   font-weight: 500;
   opacity: 0.85;
 }
@@ -657,10 +657,10 @@
 }
 
 .bmi-stat {
-  color: #F5F1DC;
+  color: #F3F2EC;
   font-weight: 600;
 }
 
 .bmi-value {
-  color: #F5F1DC;
+  color: #F3F2EC;
 }

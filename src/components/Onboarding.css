@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(1000px 500px at 10% 10%, rgba(16,185,129,0.06), transparent), var(--bg);
-  color: #e6eef6;
+  color: #F3F2EC;
   position: relative; /* For pseudo-element positioning */
   overflow: hidden; /* Keep pseudo-elements contained */
 }

@@ -6,6 +6,7 @@ import './App.css'
 import Onboarding from './components/Onboarding'
 import RegistrationForm from './components/RegistrationForm'
 import LandingPage from './components/LandingPage'
+import UserProfile from './components/UserProfile'
 
 // Wrapper component for animation context
 function AnimationLayout() {
@@ -17,6 +18,8 @@ function AnimationLayout() {
         <Route path="/" element={<Onboarding />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/home" element={<LandingPage />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/profile/:section" element={<UserProfile />} />
       </Routes>
     </AnimatePresence>
   )
