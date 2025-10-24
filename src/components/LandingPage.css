@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   background: var(--bg);
-  color: #F5F1DC;
+  color: #F3F2EC;
   position: relative;
   overflow-x: hidden;
 }
@@ -354,7 +354,7 @@
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-style: italic;
-  color: #F5F1DC;
+  color: #F3F2EC;
 }
 
 .testimonial-author {
@@ -588,7 +588,7 @@
 .dashboard-card p {
   font-size: 0.9rem;
   margin-bottom: 1rem;
-  color: #F5F1DC;
+  color: #F3F2EC;
   opacity: 0.8;
 }
 
@@ -668,7 +668,7 @@
 
 .stat-card p {
   font-size: 0.8rem;
-  color: #F5F1DC;
+  color: #F3F2EC;
   opacity: 0.8;
 }
 

@@ -15,6 +15,20 @@ export default function LandingPage() {
   const [showAddModal, setShowAddModal] = React.useState(false);
   const [trackedFoods, setTrackedFoods] = React.useState([]);
   
+  // Mark user as logged in when landing page loads
+  React.useEffect(() => {
+    localStorage.setItem('userLoggedIn', 'true');
+    
+    // Store user data if available
+    if (location.state?.userName) {
+      const userData = {
+        name: location.state.userName,
+        initial: location.state.userName.charAt(0).toUpperCase()
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+    }
+  }, [location.state]);
+  
   // Get user name from route state or use default
   const userName = location.state?.userName || "";
   
@@ -410,7 +424,7 @@ export default function LandingPage() {
         </div>
         <div 
           className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
-          onClick={() => handleTabChange('profile')}
+          onClick={() => navigate('/profile', { state: { userName } })}
         >
           <div className="user-avatar">
             {userInitial}

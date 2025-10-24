@@ -104,12 +104,39 @@ export default function RegistrationForm() {
   const finalSubmit = () => {
     // Here you would handle the form submission, like sending data to a server
     console.log('Form submitted:', formData)
+    
+    // Mark user as logged in
+    localStorage.setItem('userLoggedIn', 'true');
+    
+    // Store user data
+    const userData = {
+      name: formData.name,
+      email: formData.email,
+      age: formData.age,
+      initial: formData.name.charAt(0).toUpperCase()
+    };
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
+    // Navigate to home
     navigate('/home', { state: { userName: formData.name } })
   }
 
   const skipAndExplore = () => {
     // Save whatever data we have so far
     console.log('Skipped, partial data:', formData)
+    
+    // Mark user as logged in even if they skip
+    localStorage.setItem('userLoggedIn', 'true');
+    
+    // Store basic user data
+    if (formData.name) {
+      const userData = {
+        name: formData.name,
+        initial: formData.name.charAt(0).toUpperCase()
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+    }
+    
     navigate('/home', { state: { userName: formData.name } })
   }
 
