@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AddFoodModal from './AddFoodModal';
+import TrackSection from './TrackSection';
 import './LandingPage.css';
 
 export default function LandingPage() {
@@ -10,6 +12,8 @@ export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [carouselVisible, setCarouselVisible] = React.useState(true);
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
+  const [showAddModal, setShowAddModal] = React.useState(false);
+  const [trackedFoods, setTrackedFoods] = React.useState([]);
   
   // Get user name from route state or use default
   const userName = location.state?.userName || "";
@@ -98,8 +102,25 @@ export default function LandingPage() {
   }, [lastScrollTop]);
   
   const handleTabChange = (tab) => {
+    if (tab === 'add') {
+      setShowAddModal(true);
+      return;
+    }
     setActiveTab(tab);
     // Additional logic for each tab can be added here
+  };
+
+  // Handle adding food from modal
+  const handleAddFood = (food) => {
+    setTrackedFoods(prev => [food, ...prev]);
+    setActiveTab('track'); // Switch to track section after adding food
+  };
+
+  // Handle removing food
+  const handleRemoveFood = (foodId, timestamp) => {
+    setTrackedFoods(prev => 
+      prev.filter(food => !(food.id === foodId && food.timestamp === timestamp))
+    );
   };
 
   return (
@@ -279,6 +300,21 @@ export default function LandingPage() {
           </motion.div>
         )}
         
+        {activeTab === 'track' && (
+          <motion.div 
+            className="content-placeholder"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <TrackSection 
+              trackedFoods={trackedFoods}
+              onRemoveFood={handleRemoveFood}
+              userName={userName}
+            />
+          </motion.div>
+        )}
+        
         {activeTab === 'snaps' && (
           <motion.div 
             className="content-placeholder"
@@ -352,11 +388,11 @@ export default function LandingPage() {
           <span>Home</span>
         </div>
         <div 
-          className={`nav-item ${activeTab === 'snaps' ? 'active' : ''}`}
-          onClick={() => handleTabChange('snaps')}
+          className={`nav-item ${activeTab === 'track' ? 'active' : ''}`}
+          onClick={() => handleTabChange('track')}
         >
-          <i className="bi bi-camera"></i>
-          <span>Snaps</span>
+          <i className="bi bi-clipboard-data"></i>
+          <span>Track</span>
         </div>
         <div className="nav-item add-button">
           <div className="plus-button" onClick={() => handleTabChange('add')}>
@@ -382,6 +418,13 @@ export default function LandingPage() {
           <span>Me</span>
         </div>
       </motion.nav>
+
+      {/* Add Food Modal */}
+      <AddFoodModal 
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onAddFood={handleAddFood}
+      />
     </div>
   );
 }
