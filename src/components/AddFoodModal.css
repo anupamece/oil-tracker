@@ -40,7 +40,7 @@
 
 .modal-header h2 {
   margin: 0;
-  color: #F5F1DC;
+  color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
 .close-button {
   background: none;
   border: none;
-  color: #9aa6b2;
+  color: var(--text-secondary);
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -57,7 +57,7 @@
 }
 
 .close-button:hover {
-  color: #F5F1DC;
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -73,7 +73,7 @@
   padding: 1rem;
   background: none;
   border: none;
-  color: #9aa6b2;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -86,7 +86,7 @@
 }
 
 .tab-button:hover {
-  color: #F5F1DC;
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -130,7 +130,7 @@
 .search-icon {
   position: absolute;
   left: 1rem;
-  color: #9aa6b2;
+  color: var(--text-secondary);
   font-size: 1rem;
   z-index: 1;
 }
@@ -141,7 +141,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  color: #F5F1DC;
+  color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.2s ease;
 }
@@ -154,7 +154,7 @@
 }
 
 .search-input::placeholder {
-  color: #9aa6b2;
+  color: var(--text-muted);
 }
 
 .clear-search {
@@ -162,7 +162,7 @@
   right: 1rem;
   background: none;
   border: none;
-  color: #9aa6b2;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
@@ -170,7 +170,7 @@
 }
 
 .clear-search:hover {
-  color: #F5F1DC;
+  color: var(--text-primary);
 }
 
 /* Quick Suggestions */
@@ -180,7 +180,7 @@
 
 .suggestions-label {
   margin: 0 0 0.75rem 0;
-  color: #9aa6b2;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -196,7 +196,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 0.5rem 1rem;
-  color: #F5F1DC;
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -561,4 +561,61 @@
   .camera-icon i {
     font-size: 1.5rem;
   }
+}
+
+/* Light Theme Overrides */
+.theme-light .add-food-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.theme-light .add-food-modal {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.theme-light .modal-header {
+  background: #f9fafb;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.theme-light .modal-tabs {
+  background: #f9fafb;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.theme-light .tab-button:hover {
+  background: #f3f4f6;
+}
+
+.theme-light .search-input {
+  background: #f9fafb;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .search-input:focus {
+  background: #ffffff;
+  border-color: var(--accent);
+}
+
+.theme-light .suggestion-button {
+  background: #f3f4f6;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .suggestion-button:hover {
+  background: #e5e7eb;
+}
+
+.theme-light .food-card {
+  background: #f9fafb;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .food-card:hover {
+  background: #f3f4f6;
+}
+
+.theme-light .close-button:hover {
+  background: #f3f4f6;
 }

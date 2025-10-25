@@ -9,6 +9,7 @@ export default function RegistrationForm() {
   const [formData, setFormData] = useState({
     // Basic info (Step 1)
     name: '',
+    email: '',
     age: '',
     weight: '',
     height: '',
@@ -235,6 +236,20 @@ export default function RegistrationForm() {
                     required
                     placeholder="Enter your name"
                     autoFocus
+                  />
+                </div>
+                
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    required
+                    placeholder="you@example.com"
                   />
                 </div>
                 

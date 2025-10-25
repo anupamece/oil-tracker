@@ -1,0 +1,121 @@
+.daily-details-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-primary);
+  padding: 1rem;
+  padding-bottom: 6rem;
+}
+
+.details-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.details-header h1 {
+  margin: 0.3rem 0 0 0;
+  color: var(--primary);
+  font-size: 1.4rem;
+}
+
+.details-header .sub {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.top-summary {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0 1.2rem 0;
+}
+
+.circle-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.circular-progress { width: 90px; height: 90px; transform: rotate(-90deg); }
+.circular-progress-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 8; }
+.circular-progress-fill { fill: none; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 327; transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease; }
+.circular-emoji { font-size: 1.8rem; text-anchor: middle; dominant-baseline: middle; transform: rotate(90deg); transform-origin: center; }
+
+.circle-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.circle-value { font-size: 1.3rem; font-weight: 700; }
+.circle-label { font-size: 0.8rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.foods-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.empty { text-align: center; opacity: 0.7; padding: 2rem 0; }
+.empty .emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.food-row { background-color: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.8rem; }
+.food-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.food-head .left { display: flex; align-items: center; gap: 0.6rem; }
+.food-head .emoji { font-size: 1.6rem; }
+.food-head .names h3 { margin: 0; font-size: 1rem; }
+.food-head .names .time { font-size: 0.75rem; opacity: 0.7; }
+.food-head .right .cal { font-weight: 700; color: #F3F2EC; }
+
+.macro-bars { display: flex; flex-direction: column; gap: 0.4rem; }
+.bar-row { display: grid; grid-template-columns: 70px 1fr 50px; align-items: center; gap: 0.5rem; }
+.bar-row .lbl { font-size: 0.75rem; opacity: 0.8; }
+.bar-row .val { font-size: 0.75rem; opacity: 0.9; text-align: right; }
+.bar { width: 100%; height: 6px; background-color: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; }
+.fill { height: 100%; border-radius: 6px; transition: width 0.3s ease; }
+.fill.protein { background: #60a5fa; }
+.fill.carbs   { background: #34d399; }
+.fill.fat     { background: #f59e0b; }
+.fill.fiber   { background: #a78bfa; }
+
+@media (max-width: 480px) {
+  .top-summary { gap: 0.7rem; }
+  .circular-progress { width: 80px; height: 80px; }
+  .circle-value { font-size: 1.15rem; }
+  .bar-row { grid-template-columns: 60px 1fr 45px; }
+}
+
+/* Light Theme Overrides */
+.theme-light .circle-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.theme-light .food-row {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.theme-light .back-btn {
+  background-color: #f3f4f6;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .circular-progress-bg {
+  stroke: #e5e7eb;
+}
+
+.theme-light .bar {
+  background-color: #e5e7eb;
+}

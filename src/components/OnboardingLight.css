@@ -1,0 +1,48 @@
+/* Light Theme Overrides for Onboarding */
+.theme-light .onboard-hero::after {
+  background: rgba(var(--bg-rgb), 0.85);
+}
+
+.theme-light .hero-card {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.theme-light .hero-content p.lead {
+  color: var(--text-secondary);
+}
+
+.theme-light .btn-glow:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(var(--glow-rgb), 0.55),
+    0 0 0 6px rgba(0, 0, 0, 0.08),
+    0 0 26px rgba(var(--glow-rgb), 0.95);
+}
+
+.theme-light .registration-form-container {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.theme-light .registration-form-header {
+  background: #f9fafb;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.theme-light .form-control {
+  background-color: #f9fafb;
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.theme-light .form-control:focus {
+  background-color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgba(14, 165, 169, 0.15);
+}
+
+.theme-light .form-check-label {
+  color: var(--text-primary);
+}

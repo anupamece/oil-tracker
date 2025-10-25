@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(1000px 500px at 10% 10%, rgba(16,185,129,0.06), transparent), var(--bg);
-  color: #F3F2EC;
+  color: var(--text-primary);
   padding: 1rem;
   /* Animation handled by Framer Motion */
   position: absolute;
@@ -78,7 +78,7 @@
 
 .registration-header h2 {
   margin: 0.25rem auto 0.5rem;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.5rem;
   text-align: center;
   font-weight: 500;
@@ -116,7 +116,7 @@
 }
 
 .back-button {
-  color: #e6eef6;
+  color: var(--text-secondary);
   font-size: 1.25rem;
   padding: 0.5rem;
   display: flex;
@@ -142,7 +142,7 @@
 }
 
 .form-label {
-  color: #e6eef6;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -630,13 +630,13 @@
 }
 
 .text-white-75 {
-  color: #F3F2EC !important;
+  color: var(--text-primary) !important;
   font-weight: 500;
   opacity: 0.85;
 }
 
 .text-summary-subtitle {
-  color: #F5F1DC !important;
+  color: var(--text-primary) !important;
   font-weight: 500;
   opacity: 0.85;
 }
@@ -657,10 +657,35 @@
 }
 
 .bmi-stat {
-  color: #F3F2EC;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .bmi-value {
-  color: #F3F2EC;
+  color: var(--text-primary);
+}
+
+/* Light Theme Overrides */
+.theme-light .registration-container {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.theme-light .registration-header {
+  background: #f9fafb;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.theme-light .form-control,
+.theme-light .form-select {
+  background-color: #f9fafb;
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.theme-light .form-control:focus,
+.theme-light .form-select:focus {
+  background-color: #ffffff;
+  border-color: var(--accent);
 }

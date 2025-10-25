@@ -8,6 +8,7 @@ export default function UserProfile() {
   const location = useLocation();
   const params = useParams();
   const [activeSection, setActiveSection] = useState(params.section || null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') === 'light' ? 'light' : 'dark');
   
   // Check if user is logged in, redirect to onboarding if not
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function UserProfile() {
   const [userName, setUserName] = useState("User");
   const [firstName, setFirstName] = useState("User");
   const [userInitial, setUserInitial] = useState("U");
+  const [userEmail, setUserEmail] = useState('');
   
   // Load user data on component mount
   useEffect(() => {
@@ -32,11 +34,13 @@ export default function UserProfile() {
       setUserName(userData.name || "User");
       setFirstName((userData.name || "User").split(' ')[0]);
       setUserInitial(userData.initial || "U");
+      setUserEmail(userData.email || '');
     } else if (location.state?.userName) {
       // Fall back to route state if available
       setUserName(location.state.userName);
       setFirstName(location.state.userName.split(' ')[0]);
       setUserInitial(location.state.userName.charAt(0).toUpperCase());
+      if (location.state.userEmail) setUserEmail(location.state.userEmail);
     }
   }, [location.state]);
   
@@ -53,6 +57,18 @@ export default function UserProfile() {
     } else {
       navigate('/home', { state: { userName } });
     }
+  };
+
+  const applyTheme = (mode) => {
+    const root = document.documentElement;
+    root.classList.remove('theme-light', 'theme-dark');
+    root.classList.add(mode === 'light' ? 'theme-light' : 'theme-dark');
+    localStorage.setItem('theme', mode);
+    setTheme(mode);
+  };
+
+  const toggleTheme = () => {
+    applyTheme(theme === 'light' ? 'dark' : 'light');
   };
   
   const handleMenuItemClick = (sectionId) => {
@@ -105,6 +121,12 @@ export default function UserProfile() {
       description: 'Get assistance and contact support'
     },
     {
+      id: 'data',
+      title: 'Data Management',
+      icon: 'bi-database',
+      description: 'Backup, restore, or clear your tracked data'
+    },
+    {
       id: 'settings',
       title: 'Settings',
       icon: 'bi-gear',
@@ -125,6 +147,17 @@ export default function UserProfile() {
           <div className="back-button" onClick={handleBack}>
             <i className="bi bi-chevron-left"></i>
           </div>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button
+              className="btn btn-sm btn-outline-primary"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title="Toggle theme"
+            >
+              <i className={`bi ${theme === 'light' ? 'bi-moon-stars' : 'bi-sun'}`}></i>
+              <span style={{ marginLeft: 6 }}>{theme === 'light' ? 'Dark' : 'Light'}</span>
+            </button>
+          </div>
         </div>
         
         {/* User info and edit button row */}
@@ -135,7 +168,8 @@ export default function UserProfile() {
             </div>
             <div className="user-name-section">
               <h1>{firstName}</h1>
-              <p>{userName}</p>
+              <p className="full-name">{userName}</p>
+              {userEmail && <p className="user-email">{userEmail}</p>}
             </div>
           </div>
           
@@ -167,6 +201,19 @@ export default function UserProfile() {
       
       {!activeSection ? (
         <div className="profile-menu-container">
+          {/* Theme toggle at top of menu list */}
+          <div className="profile-menu-item" onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+            <div className="menu-item-icon">
+              <i className={`bi ${theme === 'light' ? 'bi-moon-stars' : 'bi-sun'}`}></i>
+            </div>
+            <div className="menu-item-content">
+              <h3>Theme</h3>
+              <p>Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode</p>
+            </div>
+            <div className="menu-item-arrow">
+              <i className="bi bi-toggle2-on"></i>
+            </div>
+          </div>
           {profileMenuItems.map((item, index) => (
             <motion.div 
               key={item.id}
@@ -348,6 +395,125 @@ export default function UserProfile() {
                 <h3>Help & Support</h3>
                 <p>Need assistance? Contact our support team or browse our help articles.</p>
                 <button className="action-button">Contact Support</button>
+              </div>
+            )}
+            
+            {activeSection === 'data' && (
+              <div className="settings-section">
+                <div className="settings-category">
+                  <h3>Data Management</h3>
+                  <p style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
+                    Manage your tracked food data
+                  </p>
+                  
+                  <div className="settings-options">
+                    <div className="settings-option" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <div className="option-info" style={{ marginBottom: '0.5rem' }}>
+                        <i className="bi bi-database"></i>
+                        <h4>Current Data</h4>
+                      </div>
+                      <p style={{ fontSize: '0.9rem', opacity: 0.7, marginBottom: '1rem' }}>
+                        {(() => {
+                          const trackedFoods = JSON.parse(localStorage.getItem('trackedFoods') || '[]');
+                          return `${trackedFoods.length} food items tracked`;
+                        })()}
+                      </p>
+                      <button 
+                        className="action-button" 
+                        style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
+                        onClick={() => {
+                          const data = localStorage.getItem('trackedFoods');
+                          if (!data) {
+                            alert('No data to export');
+                            return;
+                          }
+                          const blob = new Blob([data], { type: 'application/json' });
+                          const url = URL.createObjectURL(blob);
+                          const a = document.createElement('a');
+                          a.href = url;
+                          a.download = `swasth-kadam-backup-${new Date().toISOString().split('T')[0]}.json`;
+                          a.click();
+                          URL.revokeObjectURL(url);
+                        }}
+                      >
+                        <i className="bi bi-download"></i> Export Data
+                      </button>
+                    </div>
+
+                    <div className="settings-option" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <div className="option-info" style={{ marginBottom: '0.5rem' }}>
+                        <i className="bi bi-upload"></i>
+                        <h4>Restore Data</h4>
+                      </div>
+                      <p style={{ fontSize: '0.9rem', opacity: 0.7, marginBottom: '1rem' }}>
+                        Import previously exported data
+                      </p>
+                      <input
+                        type="file"
+                        accept=".json"
+                        style={{ display: 'none' }}
+                        id="import-data-input"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          
+                          const reader = new FileReader();
+                          reader.onload = (event) => {
+                            try {
+                              const data = JSON.parse(event.target.result);
+                              if (Array.isArray(data)) {
+                                localStorage.setItem('trackedFoods', JSON.stringify(data));
+                                alert(`Successfully imported ${data.length} food items. Please refresh the page.`);
+                                window.location.href = '/home';
+                              } else {
+                                alert('Invalid data format');
+                              }
+                            } catch (error) {
+                              alert('Error importing data: ' + error.message);
+                            }
+                          };
+                          reader.readAsText(file);
+                        }}
+                      />
+                      <button 
+                        className="action-button" 
+                        style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
+                        onClick={() => document.getElementById('import-data-input').click()}
+                      >
+                        <i className="bi bi-upload"></i> Import Data
+                      </button>
+                    </div>
+
+                    <div className="settings-option" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <div className="option-info" style={{ marginBottom: '0.5rem' }}>
+                        <i className="bi bi-trash" style={{ color: '#ef4444' }}></i>
+                        <h4>Clear All Data</h4>
+                      </div>
+                      <p style={{ fontSize: '0.9rem', opacity: 0.7, marginBottom: '1rem' }}>
+                        Permanently delete all tracked food data
+                      </p>
+                      <button 
+                        className="action-button" 
+                        style={{ 
+                          fontSize: '0.9rem', 
+                          padding: '0.5rem 1rem',
+                          background: 'rgba(239, 68, 68, 0.1)',
+                          borderColor: '#ef4444',
+                          color: '#ef4444'
+                        }}
+                        onClick={() => {
+                          if (window.confirm('Are you sure you want to delete all tracked data? This cannot be undone.')) {
+                            localStorage.setItem('trackedFoods', '[]');
+                            alert('All data cleared successfully. Please refresh the page.');
+                            window.location.href = '/home';
+                          }
+                        }}
+                      >
+                        <i className="bi bi-trash"></i> Clear All Data
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
             

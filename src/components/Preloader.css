@@ -1,0 +1,90 @@
+.preloader-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: overlayFade 320ms ease forwards;
+  animation-delay: var(--overlay-fade-delay, 1800ms);
+}
+
+.preloader-ball {
+  position: relative;
+  width: clamp(180px, 42vw, 270px);
+  height: clamp(180px, 42vw, 270px);
+  border-radius: 50%;
+  background: radial-gradient(120% 120% at 30% 30%, rgba(255,255,255,0.12), rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.35) 100%);
+  overflow: hidden;
+  box-shadow:
+    inset 0 12px 24px rgba(255,255,255,0.08),
+    inset 0 -10px 30px rgba(0,0,0,0.35),
+    0 12px 40px rgba(0,0,0,0.35);
+  animation: ballEnter 420ms ease-out both, ballMove 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0ms, var(--move-delay, 1200ms);
+}
+
+.preloader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(66px, 60%, 129px);
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+  z-index: 3;
+  pointer-events: none;
+}
+
+.preloader-liquid {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #FFD700 0%, #E6B800 60%, #C08E00 100%);
+  animation: fill-up var(--preloader-duration, 1600ms) ease-out forwards;
+  box-shadow: inset 0 8px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Subtle wave overlays */
+.wave {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180%;
+  height: 60%;
+  background: radial-gradient(70% 60% at 50% 50%, rgba(255,255,255,0.25), rgba(255,255,255,0) 70%);
+  opacity: 0.35;
+  border-radius: 46% 54% 40% 60% / 52% 34% 66% 48%;
+  filter: blur(6px);
+}
+.wave1 { bottom: -8%; animation: waveMove var(--preloader-duration, 1600ms) linear infinite; }
+.wave2 { bottom: -2%; animation: waveMove var(--preloader-duration, 1600ms) linear infinite reverse; opacity: 0.25; }
+
+@keyframes fill-up {
+  0% { height: 0%; }
+  100% { height: 100%; }
+}
+
+@keyframes waveMove {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  50% { transform: translateX(-52%) translateY(-2%) rotate(2deg); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+@keyframes ballEnter {
+  0% { transform: translateY(40vh); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes ballMove {
+  0% { transform: translateY(0); }
+  100% { transform: translate(var(--move-x, 0px), var(--move-y, 0px)); }
+}
+
+@keyframes overlayFade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

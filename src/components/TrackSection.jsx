@@ -94,67 +94,6 @@ export default function TrackSection({ trackedFoods, onRemoveFood, userName }) {
           <h1>Today's Tracking</h1>
           <p className="greeting">Hey {userName || 'there'}! Here's your daily overview</p>
         </div>
-
-        <div className="summary-cards">
-          {/* Calories Card */}
-          <motion.div 
-            className="summary-card calories-card"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.3 }}
-          >
-            <div className="card-icon">🔥</div>
-            <div className="card-content">
-              <h3>{dailyTotals.calories}</h3>
-              <p>Calories</p>
-              <div className="card-subtitle">
-                {dailyTotals.foodCount} meal{dailyTotals.foodCount !== 1 ? 's' : ''} logged
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Oil Level Card */}
-          <motion.div 
-            className="summary-card oil-card"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.3 }}
-          >
-            <div className="card-icon">{oilStatus.icon}</div>
-            <div className="card-content">
-              <h3 style={{ color: oilStatus.color }}>{oilStatus.text}</h3>
-              <p>Oil Level</p>
-              <div className="oil-progress">
-                <div 
-                  className="oil-progress-bar"
-                  style={{ 
-                    width: `${Math.min(dailyTotals.oilLevel, 100)}%`,
-                    backgroundColor: oilStatus.color
-                  }}
-                ></div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Health Score Card */}
-          <motion.div 
-            className="summary-card health-card"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.3 }}
-          >
-            <div className="card-icon">⭐</div>
-            <div className="card-content">
-              <h3 style={{ color: getHealthScoreColor(dailyTotals.avgHealthScore) }}>
-                {dailyTotals.avgHealthScore.toFixed(1)}/10
-              </h3>
-              <p>Health Score</p>
-              <div className="score-stars">
-                {'⭐'.repeat(Math.floor(dailyTotals.avgHealthScore / 2))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
       </div>
 
       {/* Food Timeline */}

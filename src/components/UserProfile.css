@@ -263,6 +263,52 @@ body.signing-out {
   background-color: rgba(220, 38, 38, 0.3);
 }
 
+/* Light theme refinements */
+.theme-light .user-profile-page {
+  color: var(--text-primary);
+}
+
+.theme-light .back-button,
+.theme-light .edit-profile-button {
+  background-color: #f3f4f6;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .profile-stats-summary {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .profile-menu-item {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .profile-menu-item:hover {
+  background-color: #f9fafb;
+}
+
+.theme-light .section-header,
+.theme-light .section-placeholder,
+.theme-light .settings-category,
+.theme-light .suggestion-item,
+.theme-light .goals-suggestions,
+.theme-light .goal-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+}
+
+.theme-light .goals-intro {
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.theme-light .logout-button {
+  background-color: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
 /* Responsive Adjustments */
 @media (max-width: 480px) {
   .profile-header {

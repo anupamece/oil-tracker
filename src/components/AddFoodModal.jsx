@@ -39,11 +39,12 @@ export default function AddFoodModal({ isOpen, onClose, onAddFood }) {
 
   // Handle food selection
   const handleFoodSelect = (food) => {
-    onAddFood({
+    const foodEntry = {
       ...food,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(), // Use ISO string for better serialization
       id: Date.now() // Add unique tracking ID
-    });
+    };
+    onAddFood(foodEntry);
     onClose();
     setSearchQuery('');
     setSearchResults([]);

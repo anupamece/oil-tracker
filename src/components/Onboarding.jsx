@@ -1,14 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import './Onboarding.css'
+import './OnboardingLight.css'
+import Preloader from './Preloader'
 
 export default function Onboarding() {
   const [lang, setLang] = useState('en')
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const logoRef = useRef(null)
+  const [prePos, setPrePos] = useState({ x: 0, y: 0 })
 
   const handleGetStarted = () => {
     navigate('/register')
+  }
+
+  useEffect(() => {
+    const measure = () => {
+      const rect = logoRef.current?.getBoundingClientRect()
+      if (!rect) return
+      const cx = window.innerWidth / 2
+      const cy = window.innerHeight / 2
+      const tx = rect.left + rect.width / 2 - cx
+      const ty = rect.top + rect.height / 2 - cy
+      setPrePos({ x: tx, y: ty })
+    }
+    const r = requestAnimationFrame(measure)
+    const t = setTimeout(() => setLoading(false), 2100)
+    return () => { cancelAnimationFrame(r); clearTimeout(t) }
+  }, [])
+
+  if (loading) {
+    return <Preloader duration={1600} moveDelay={1200} targetX={prePos.x} targetY={prePos.y} />
   }
 
   return (
@@ -29,9 +53,7 @@ export default function Onboarding() {
           <div className="hero-content">
             <div className="d-flex justify-content-between align-items-start mb-3 app-header">
               <div className="app-logo-container">
-                <div className="logo-circle-bg">
-                  <img src="/logo.png" alt="Lean & Lite Logo" className="app-logo" />
-                </div>
+                <img ref={logoRef} src="/logo.png" alt="Lean & Lite Logo" className="app-logo" />
               </div>
 
               <div className="lang-select">
@@ -56,22 +78,27 @@ export default function Onboarding() {
             </div>
 
             <div className="description-text">
-              <p className="mb-2">Track the oil content in meals and get friendly suggestions to make small changes for better health.</p>
-            </div>
-            
-            <div className="illustration">
-              <img 
-                src="/oil.png" 
-                alt="Healthy cooking oil"
-                className="oil-image"
-                width="100%"
-                height="auto"
-              />
+              <h1 className="mb-2" style={{ fontWeight: 800 }}>Swasth Kadam</h1>
+              <p className="lead mb-2">Small steps. Strong health. A smarter way to eat every day.</p>
+              <p className="mb-2">
+                Swasth Kadam helps you understand what goes into your plate—especially oils and calories—so you can make
+                confident, healthier choices without giving up on the foods you love. Track meals, see insights, and take
+                one positive step at a time.
+              </p>
+              <ul style={{ textAlign: 'left', margin: '0.5rem 0 0.75rem 1.1rem' }}>
+                <li>Instant oil-awareness for Indian foods you actually eat</li>
+                <li>Daily health score and simple, actionable tips</li>
+                <li>Beautiful progress visuals to keep you motivated</li>
+              </ul>
+              <p className="mb-0">
+                We are changing lives with gentle, habit-first guidance. Our aim is simple and ambitious:
+                to make India healthier—one plate, one day, one Swasth Kadam at a time.
+              </p>
             </div>
             
             <div className="action-buttons">
               <motion.button 
-                className="btn btn-lg btn-success me-3"
+                className="btn btn-lg btn-success me-3 btn-glow"
                 onClick={handleGetStarted}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -89,7 +116,7 @@ export default function Onboarding() {
           </div>
           
           {/* This illustration is for desktop layout only */}
-          <div className="illustration">
+          {/* <div className="illustration">
             <img 
               src="/oil.png" 
               alt="Healthy cooking oil"
@@ -97,7 +124,7 @@ export default function Onboarding() {
               width="100%"
               height="auto"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </motion.main>
